@@ -21,8 +21,6 @@ namespace NOC_EmbratelPortalLoginAssistant
 			// Adiciona o manipulador de eventos HandleMouseDown para permitir que o formulário,
 			// o painel e o título sejam arrastados com o mouse
 			this.MouseDown += new MouseEventHandler(HandleMouseDown);
-			this.panel1.MouseDown += new MouseEventHandler(HandleMouseDown);
-			this.title.MouseDown += new MouseEventHandler(HandleMouseDown);
 		}
 
 		// Manipulador de eventos para permitir que o formulário seja movido ao clicar e arrastar com o mouse
