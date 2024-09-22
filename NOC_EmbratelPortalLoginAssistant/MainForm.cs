@@ -15,23 +15,18 @@ namespace NOC_EmbratelPortalLoginAssistant
 		public MainForm()
 		{
 			InitializeComponent();
-			this.MouseDown += new MouseEventHandler(MainForm_MouseDown);
+			this.MouseDown += new MouseEventHandler(HandleMouseDown);
+			this.panel1.MouseDown += new MouseEventHandler(HandleMouseDown);
+			this.title.MouseDown += new MouseEventHandler(HandleMouseDown);
 		}
-		
-		private void MainForm_MouseDown(object sender, MouseEventArgs e)
+		private void HandleMouseDown(object sender, MouseEventArgs e)
 		{
-			if(e.Button == MouseButtons.Left)
+			if (e.Button == MouseButtons.Left)
 			{
 				ReleaseCapture();
 				SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
 			}
 		}
-		
-		void MainFormLoad(object sender, EventArgs e)
-		{
-			
-		}
-		
 		[DllImport("user32.dll")]
 		private static extern bool ReleaseCapture();
 

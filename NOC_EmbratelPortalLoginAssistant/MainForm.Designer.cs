@@ -12,7 +12,7 @@ namespace NOC_EmbratelPortalLoginAssistant
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label title;
 		
 		protected override void Dispose(bool disposing)
 		{
@@ -31,14 +31,14 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.label1 = new System.Windows.Forms.Label();
+			this.title = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// button1
 			// 
 			this.button1.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.Location = new System.Drawing.Point(11, 42);
+			this.button1.Location = new System.Drawing.Point(11, 36);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(90, 66);
 			this.button1.TabIndex = 0;
@@ -48,7 +48,7 @@ namespace NOC_EmbratelPortalLoginAssistant
 			// button2
 			// 
 			this.button2.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button2.Location = new System.Drawing.Point(105, 42);
+			this.button2.Location = new System.Drawing.Point(105, 36);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(90, 66);
 			this.button2.TabIndex = 1;
@@ -58,7 +58,7 @@ namespace NOC_EmbratelPortalLoginAssistant
 			// button3
 			// 
 			this.button3.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button3.Location = new System.Drawing.Point(199, 42);
+			this.button3.Location = new System.Drawing.Point(199, 36);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(90, 66);
 			this.button3.TabIndex = 2;
@@ -68,7 +68,7 @@ namespace NOC_EmbratelPortalLoginAssistant
 			// button4
 			// 
 			this.button4.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button4.Location = new System.Drawing.Point(293, 42);
+			this.button4.Location = new System.Drawing.Point(293, 36);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(90, 66);
 			this.button4.TabIndex = 3;
@@ -78,29 +78,29 @@ namespace NOC_EmbratelPortalLoginAssistant
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.SlateGray;
-			this.panel1.Controls.Add(this.label1);
+			this.panel1.Controls.Add(this.title);
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(491, 36);
+			this.panel1.Size = new System.Drawing.Size(491, 27);
 			this.panel1.TabIndex = 4;
 			// 
-			// label1
+			// title
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.ForeColor = System.Drawing.Color.White;
-			this.label1.Location = new System.Drawing.Point(11, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(143, 19);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "NOC_EmbratelLogin";
+			this.title.AutoSize = true;
+			this.title.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.title.ForeColor = System.Drawing.Color.White;
+			this.title.Location = new System.Drawing.Point(0, 4);
+			this.title.Name = "title";
+			this.title.Size = new System.Drawing.Size(143, 19);
+			this.title.TabIndex = 0;
+			this.title.Text = "NOC_EmbratelLogin";
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ScrollBar;
-			this.ClientSize = new System.Drawing.Size(395, 117);
+			this.ClientSize = new System.Drawing.Size(395, 111);
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
@@ -109,7 +109,6 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "MainForm";
 			this.Text = "NOC_EmbratelPortalLoginAssistant";
-			this.Load += new System.EventHandler(this.MainFormLoad);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
