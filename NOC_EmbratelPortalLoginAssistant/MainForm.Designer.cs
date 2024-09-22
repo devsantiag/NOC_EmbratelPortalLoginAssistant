@@ -7,10 +7,10 @@ namespace NOC_EmbratelPortalLoginAssistant
 	partial class MainForm
 	{
 		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.Button jsl;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button buttonIntermedica;
+		private System.Windows.Forms.Button buttonMovida;
+		private System.Windows.Forms.Button buttonCentauro;
+		private System.Windows.Forms.Button buttonJSL;
 		
 		protected override void Dispose(bool disposing)
 		{
@@ -24,63 +24,66 @@ namespace NOC_EmbratelPortalLoginAssistant
 		
 		private void InitializeComponent()
 		{
-			this.jsl = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
+			this.buttonIntermedica = new System.Windows.Forms.Button();
+			this.buttonMovida = new System.Windows.Forms.Button();
+			this.buttonCentauro = new System.Windows.Forms.Button();
+			this.buttonJSL = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
-			// jsl
+			// buttonIntermedica
 			// 
-			this.jsl.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.jsl.Location = new System.Drawing.Point(2, 6);
-			this.jsl.Name = "jsl";
-			this.jsl.Size = new System.Drawing.Size(90, 37);
-			this.jsl.TabIndex = 0;
-			this.jsl.Text = "JSL";
-			this.jsl.UseVisualStyleBackColor = true;
-			this.jsl.Click += new System.EventHandler(this.JslClick);
+			this.buttonIntermedica.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonIntermedica.Location = new System.Drawing.Point(195, 6);
+			this.buttonIntermedica.Name = "buttonIntermedica";
+			this.buttonIntermedica.Size = new System.Drawing.Size(90, 37);
+			this.buttonIntermedica.TabIndex = 2;
+			this.buttonIntermedica.Text = "INTERMÉDICA";
+			this.buttonIntermedica.UseVisualStyleBackColor = true;
+			this.buttonIntermedica.Click += new System.EventHandler(this.ButtonIntermedicaClick);
 			// 
-			// button2
+			// buttonMovida
 			// 
-			this.button2.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button2.Location = new System.Drawing.Point(96, 6);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(90, 37);
-			this.button2.TabIndex = 1;
-			this.button2.Text = "INTERMÉDICA";
-			this.button2.UseVisualStyleBackColor = true;
+			this.buttonMovida.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonMovida.Location = new System.Drawing.Point(99, 6);
+			this.buttonMovida.Name = "buttonMovida";
+			this.buttonMovida.Size = new System.Drawing.Size(90, 37);
+			this.buttonMovida.TabIndex = 3;
+			this.buttonMovida.Text = "MOVIDA";
+			this.buttonMovida.UseVisualStyleBackColor = true;
+			this.buttonMovida.Click += new System.EventHandler(this.ButtonMovidaClick);
 			// 
-			// button3
+			// buttonCentauro
 			// 
-			this.button3.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button3.Location = new System.Drawing.Point(190, 6);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(90, 37);
-			this.button3.TabIndex = 2;
-			this.button3.Text = "MOVIDA";
-			this.button3.UseVisualStyleBackColor = true;
+			this.buttonCentauro.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonCentauro.Location = new System.Drawing.Point(291, 6);
+			this.buttonCentauro.Name = "buttonCentauro";
+			this.buttonCentauro.Size = new System.Drawing.Size(90, 37);
+			this.buttonCentauro.TabIndex = 0;
+			this.buttonCentauro.Text = "CENTAURO";
+			this.buttonCentauro.UseVisualStyleBackColor = true;
+			this.buttonCentauro.Click += new System.EventHandler(this.ButtonCentauroClick);
 			// 
-			// button4
+			// buttonJSL
 			// 
-			this.button4.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button4.Location = new System.Drawing.Point(284, 6);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(90, 37);
-			this.button4.TabIndex = 3;
-			this.button4.Text = "CENTAURO";
-			this.button4.UseVisualStyleBackColor = true;
+			this.buttonJSL.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonJSL.Location = new System.Drawing.Point(3, 6);
+			this.buttonJSL.Name = "buttonJSL";
+			this.buttonJSL.Size = new System.Drawing.Size(90, 37);
+			this.buttonJSL.TabIndex = 1;
+			this.buttonJSL.Text = "JSL";
+			this.buttonJSL.UseVisualStyleBackColor = true;
+			this.buttonJSL.Click += new System.EventHandler(this.ButtonJSLClick);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ScrollBar;
-			this.ClientSize = new System.Drawing.Size(376, 47);
-			this.Controls.Add(this.button4);
-			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.jsl);
+			this.ClientSize = new System.Drawing.Size(386, 47);
+			this.Controls.Add(this.buttonJSL);
+			this.Controls.Add(this.buttonCentauro);
+			this.Controls.Add(this.buttonMovida);
+			this.Controls.Add(this.buttonIntermedica);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Name = "MainForm";
 			this.Text = "NOC_EmbratelPortalLoginAssistant";
