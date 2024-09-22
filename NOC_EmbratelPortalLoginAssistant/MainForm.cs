@@ -15,5 +15,10 @@ namespace NOC_EmbratelPortalLoginAssistant
 		{
 			InitializeComponent();
 		}
+		void MainFormLoad(object sender, EventArgs e)
+		{
+	
+		}
+		
 	}
 }
