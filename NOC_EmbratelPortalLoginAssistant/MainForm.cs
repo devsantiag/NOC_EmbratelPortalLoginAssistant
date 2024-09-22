@@ -13,6 +13,8 @@ namespace NOC_EmbratelPortalLoginAssistant
 {
 	public partial class MainForm : Form
 	{
+		private string login = "EOL6442376";
+		private string password = "Telcom#123!@#c";
 		public MainForm()
 		{
 			InitializeComponent();
@@ -40,5 +42,27 @@ namespace NOC_EmbratelPortalLoginAssistant
 
 		private const int WM_NCLBUTTONDOWN = 0xA1;
 		private const int HTCAPTION = 0x2;
+		
+		private void JslClick(object sender, EventArgs e)
+		{
+			PortalWeb portalWeb = new PortalWeb();
+			portalWeb.Show();
+		}
+		
+		private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+		{
+			WebBrowser webBrowser = sender as WebBrowser;
+			if(webBrowser != null)
+			{
+				HtmlElement loginElement = webBrowser.Document.GetElementById("login");
+				HtmlElement passWordElement = webBrowser.Document.GetElementById("password");
+				
+				if(loginElement != null && passWordElement != null)
+				{
+					loginElement.SetAttribute("value", login);
+					passWordElement.SetAttribute("value", password);
+				}
+			}
+		}
 	}
 }
