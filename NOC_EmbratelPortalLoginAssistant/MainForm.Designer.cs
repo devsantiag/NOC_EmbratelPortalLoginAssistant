@@ -30,8 +30,8 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
-			this.panel1 = new System.Windows.Forms.Panel();
 			this.title = new System.Windows.Forms.Label();
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -75,15 +75,6 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.button4.Text = "CENTAURO";
 			this.button4.UseVisualStyleBackColor = true;
 			// 
-			// panel1
-			// 
-			this.panel1.BackColor = System.Drawing.Color.SlateGray;
-			this.panel1.Controls.Add(this.title);
-			this.panel1.Location = new System.Drawing.Point(0, 0);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(491, 27);
-			this.panel1.TabIndex = 4;
-			// 
 			// title
 			// 
 			this.title.AutoSize = true;
@@ -94,6 +85,15 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.title.Size = new System.Drawing.Size(143, 19);
 			this.title.TabIndex = 0;
 			this.title.Text = "NOC_EmbratelLogin";
+			// 
+			// panel1
+			// 
+			this.panel1.BackColor = System.Drawing.Color.SlateGray;
+			this.panel1.Controls.Add(this.title);
+			this.panel1.Location = new System.Drawing.Point(0, 0);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(491, 27);
+			this.panel1.TabIndex = 4;
 			// 
 			// MainForm
 			// 

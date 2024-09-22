@@ -4,6 +4,7 @@
  * Date: 20/09/2024
  * Time: 11:38
  */
+
 using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -15,10 +16,14 @@ namespace NOC_EmbratelPortalLoginAssistant
 		public MainForm()
 		{
 			InitializeComponent();
+			// Adiciona o manipulador de eventos HandleMouseDown para permitir que o formulário,
+			// o painel e o título sejam arrastados com o mouse
 			this.MouseDown += new MouseEventHandler(HandleMouseDown);
 			this.panel1.MouseDown += new MouseEventHandler(HandleMouseDown);
 			this.title.MouseDown += new MouseEventHandler(HandleMouseDown);
 		}
+
+		// Manipulador de eventos para permitir que o formulário seja movido ao clicar e arrastar com o mouse
 		private void HandleMouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)
