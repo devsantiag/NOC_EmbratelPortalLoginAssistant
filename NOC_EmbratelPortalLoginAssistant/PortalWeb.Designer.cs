@@ -42,9 +42,9 @@ namespace NOC_EmbratelPortalLoginAssistant
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1164, 738);
+			this.ClientSize = new System.Drawing.Size(1523, 808);
 			this.Name = "PortalWeb";
-			this.Text = "PortalWeb";
+			this.Text = "NOC_EmbratelPortal";
 			this.ResumeLayout(false);
 
 		}

@@ -44,6 +44,7 @@ namespace NOC_EmbratelPortalLoginAssistant
 		private void JslClick(object sender, EventArgs e)
 		{
 			PortalWeb portalWeb = new PortalWeb();
+			 portalWeb.WebBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
 			portalWeb.Show();
 		}
 		
