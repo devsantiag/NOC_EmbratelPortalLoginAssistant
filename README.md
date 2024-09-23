@@ -26,7 +26,10 @@ Abra o projeto no Visual Studio ou SharpDevelop.
 Restaure as dependências e compile o projeto.
 
 2. Executando o Executável Diretamente
+3. 
 Se você não deseja compilar o código, pode baixar o executável diretamente e rodá-lo:
+
+*https://github.com/devsantiag/NOC_EmbratelPortalLoginAssistant/blob/main/NOC_EmbratelPortalLoginAssistant/bin/Debug/NOC_EmbratelPortalLoginAssistant.exe*
 
 Baixe o executável diretamente clicando aqui.
 
