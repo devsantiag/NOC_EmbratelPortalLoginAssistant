@@ -79,12 +79,13 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ScrollBar;
-			this.ClientSize = new System.Drawing.Size(386, 47);
+			this.ClientSize = new System.Drawing.Size(384, 47);
 			this.Controls.Add(this.buttonJSL);
 			this.Controls.Add(this.buttonCentauro);
 			this.Controls.Add(this.buttonMovida);
 			this.Controls.Add(this.buttonIntermedica);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.Text = "NOC_EmbratelPortalLoginAssistant";
 			this.ResumeLayout(false);

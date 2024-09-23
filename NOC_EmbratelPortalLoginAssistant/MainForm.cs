@@ -1,67 +1,101 @@
-﻿/*
- * Created by SharpDevelop.
- * User: fjstavares
- * Date: 20/09/2024
- * Time: 11:38
- */
-
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace NOC_EmbratelPortalLoginAssistant
 {
 	public partial class MainForm : Form
 	{
-		private string login = "EOL6442376";
-		private string password = "Telcom#123!@#c";
+		private enum Empresa
+		{
+			JSL,
+			Movida,
+			Intermedica,
+			Centauro
+		}
+		
+		private readonly Dictionary<Empresa, Tuple<string, string>> _credenciais = new Dictionary<Empresa, Tuple<string, string>>
+		{
+			{ Empresa.JSL, Tuple.Create("EOL6442376", "Telcom#123!@#c") },
+			{ Empresa.Movida, Tuple.Create("EOL1534997", "Telcom#123!@#") },
+			{ Empresa.Intermedica, Tuple.Create("EOL799371", "Telcom#123!@#") },
+			{ Empresa.Centauro, Tuple.Create("EOL4421197", "Telcom#123!@#") }
+		};
+		
+		private string currentLogin;
+		private string currentPassword;
+
 		public MainForm()
 		{
 			InitializeComponent();
-			// Adiciona o manipulador de eventos HandleMouseDown para permitir que o formulário,
-			// o painel e o título sejam arrastados com o mouse
-			this.MouseDown += new MouseEventHandler(HandleMouseDown);
 		}
 
-		// Manipulador de eventos para permitir que o formulário seja movido ao clicar e arrastar com o mouse
-		private void HandleMouseDown(object sender, MouseEventArgs e)
+		// Método genérico para abrir o PortalWeb e preencher login e senha
+		private void OpenPortalAndFillCredentials(string url, string login, string password, bool autoLogin = false)
 		{
-			if (e.Button == MouseButtons.Left)
-			{
-				ReleaseCapture();
-				SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
-			}
-		}
-		[DllImport("user32.dll")]
-		private static extern bool ReleaseCapture();
+			currentLogin = login;
+			currentPassword = password;
 
-		[DllImport("user32.dll")]
-		private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-
-		private const int WM_NCLBUTTONDOWN = 0xA1;
-		private const int HTCAPTION = 0x2;
-		
-		private void JslClick(object sender, EventArgs e)
-		{
 			PortalWeb portalWeb = new PortalWeb();
-			 portalWeb.WebBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
+			portalWeb.WebBrowser.DocumentCompleted += (sender, e) => WebBrowser_DocumentCompleted(sender, e, autoLogin);
+			portalWeb.WebBrowser.Navigate(url);
 			portalWeb.Show();
 		}
-		
-		private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+
+		// Evento para preencher os campos de login e senha e submeter o formulário, se autoLogin for verdadeiro
+		private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e, bool autoLogin)
 		{
 			WebBrowser webBrowser = sender as WebBrowser;
-			if(webBrowser != null)
+			if (webBrowser != null)
 			{
 				HtmlElement loginElement = webBrowser.Document.GetElementById("login");
 				HtmlElement passWordElement = webBrowser.Document.GetElementById("password");
-				
-				if(loginElement != null && passWordElement != null)
+
+				if (loginElement != null && passWordElement != null)
 				{
-					loginElement.SetAttribute("value", login);
-					passWordElement.SetAttribute("value", password);
+					// Preenche os campos de login e senha
+					loginElement.SetAttribute("value", currentLogin);
+					passWordElement.SetAttribute("value", currentPassword);
+
+					if (autoLogin)
+					{
+						// Simula o clique no botão de login se autoLogin for verdadeiro
+						HtmlElement loginButton = webBrowser.Document.GetElementById("loginButton"); // Substitua pelo ID correto
+						if (loginButton != null)
+						{
+							loginButton.InvokeMember("click");
+						}
+					}
 				}
 			}
+		}
+		
+		private void HandleButtonClick(Empresa empresa)
+		{
+			var credentials = _credenciais[empresa];
+			OpenPortalAndFillCredentials("https://webebt01.embratel.com.br/embratelonline/index.asp", credentials.Item1, credentials.Item2, true);
+		}
+
+		// Eventos dos botões
+		void ButtonJSLClick(object sender, EventArgs e)
+		{
+			HandleButtonClick(Empresa.JSL);
+		}
+
+		void ButtonIntermedicaClick(object sender, EventArgs e)
+		{
+			HandleButtonClick(Empresa.Intermedica);
+		}
+
+		void ButtonMovidaClick(object sender, EventArgs e)
+		{
+			HandleButtonClick(Empresa.Movida);
+		}
+
+		void ButtonCentauroClick(object sender, EventArgs e)
+		{
+			HandleButtonClick(Empresa.Centauro);
 		}
 	}
 }
