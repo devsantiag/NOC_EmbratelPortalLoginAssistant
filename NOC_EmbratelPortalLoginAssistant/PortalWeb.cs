@@ -16,7 +16,6 @@ namespace NOC_EmbratelPortalLoginAssistant
 		public PortalWeb()
 		{
 			InitializeComponent();
-
 			// Cria uma nova instância de WebBrowser
 			webBrowser = new WebBrowser
 			{

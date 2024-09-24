@@ -89,7 +89,6 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.Name = "MainForm";
 			this.Text = "NOC_EmbratelPortalLoginAssistant";
 			this.ResumeLayout(false);
-
 		}
 	}
 }

@@ -28,6 +28,7 @@ namespace NOC_EmbratelPortalLoginAssistant
 
 		public MainForm()
 		{
+			this.TopMost = true;
 			InitializeComponent();
 		}
 
@@ -82,17 +83,14 @@ namespace NOC_EmbratelPortalLoginAssistant
 		{
 			HandleButtonClick(Empresa.JSL);
 		}
-
 		void ButtonIntermedicaClick(object sender, EventArgs e)
 		{
 			HandleButtonClick(Empresa.Intermedica);
 		}
-
 		void ButtonMovidaClick(object sender, EventArgs e)
 		{
 			HandleButtonClick(Empresa.Movida);
 		}
-
 		void ButtonCentauroClick(object sender, EventArgs e)
 		{
 			HandleButtonClick(Empresa.Centauro);
