@@ -109,5 +109,9 @@ namespace NOC_EmbratelPortalLoginAssistant
 		{
 			HandleButtonClick(Empresa.Intermedica);
 		}
+		void AdminToolStripMenuItemClick(object sender, EventArgs e)
+		{
+	
+		}
 	}
 }

@@ -12,6 +12,7 @@ namespace NOC_EmbratelPortalLoginAssistant
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tripCentauro;
         private System.Windows.Forms.ToolStripMenuItem tripIntermedica;
+        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
 
         protected override void Dispose(bool disposing)
         {
@@ -32,6 +33,7 @@ namespace NOC_EmbratelPortalLoginAssistant
         	this.tripMovida = new System.Windows.Forms.ToolStripMenuItem();
         	this.tripCentauro = new System.Windows.Forms.ToolStripMenuItem();
         	this.tripIntermedica = new System.Windows.Forms.ToolStripMenuItem();
+        	this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.menuStrip1.SuspendLayout();
         	this.SuspendLayout();
         	// 
@@ -51,7 +53,8 @@ namespace NOC_EmbratelPortalLoginAssistant
 			this.tripJsl,
 			this.tripMovida,
 			this.tripCentauro,
-			this.tripIntermedica});
+			this.tripIntermedica,
+			this.adminToolStripMenuItem});
         	this.menuStrip1.Location = new System.Drawing.Point(0, 0);
         	this.menuStrip1.Name = "menuStrip1";
         	this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -79,6 +82,14 @@ namespace NOC_EmbratelPortalLoginAssistant
         	this.tripIntermedica.Size = new System.Drawing.Size(82, 20);
         	this.tripIntermedica.Text = "Intermédica";
         	this.tripIntermedica.Click += new System.EventHandler(this.TripIntermedicaClick);
+        	// 
+        	// adminToolStripMenuItem
+        	// 
+        	this.adminToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+        	this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+        	this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+        	this.adminToolStripMenuItem.Text = "Admin";
+        	this.adminToolStripMenuItem.Click += new System.EventHandler(this.AdminToolStripMenuItemClick);
         	// 
         	// MainForm
         	// 
