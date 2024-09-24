@@ -4,91 +4,99 @@
  */
 namespace NOC_EmbratelPortalLoginAssistant
 {
-	partial class MainForm
-	{
-		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.Button buttonIntermedica;
-		private System.Windows.Forms.Button buttonMovida;
-		private System.Windows.Forms.Button buttonCentauro;
-		private System.Windows.Forms.Button buttonJSL;
-		
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing) {
-				if (components != null) {
-					components.Dispose();
-				}
-			}
-			base.Dispose(disposing);
-		}
-		
-		private void InitializeComponent()
-		{
-			this.buttonIntermedica = new System.Windows.Forms.Button();
-			this.buttonMovida = new System.Windows.Forms.Button();
-			this.buttonCentauro = new System.Windows.Forms.Button();
-			this.buttonJSL = new System.Windows.Forms.Button();
-			this.SuspendLayout();
-			// 
-			// buttonIntermedica
-			// 
-			this.buttonIntermedica.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonIntermedica.Location = new System.Drawing.Point(195, 6);
-			this.buttonIntermedica.Name = "buttonIntermedica";
-			this.buttonIntermedica.Size = new System.Drawing.Size(90, 37);
-			this.buttonIntermedica.TabIndex = 2;
-			this.buttonIntermedica.Text = "INTERMÉDICA";
-			this.buttonIntermedica.UseVisualStyleBackColor = true;
-			this.buttonIntermedica.Click += new System.EventHandler(this.ButtonIntermedicaClick);
-			// 
-			// buttonMovida
-			// 
-			this.buttonMovida.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonMovida.Location = new System.Drawing.Point(99, 6);
-			this.buttonMovida.Name = "buttonMovida";
-			this.buttonMovida.Size = new System.Drawing.Size(90, 37);
-			this.buttonMovida.TabIndex = 3;
-			this.buttonMovida.Text = "MOVIDA";
-			this.buttonMovida.UseVisualStyleBackColor = true;
-			this.buttonMovida.Click += new System.EventHandler(this.ButtonMovidaClick);
-			// 
-			// buttonCentauro
-			// 
-			this.buttonCentauro.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonCentauro.Location = new System.Drawing.Point(291, 6);
-			this.buttonCentauro.Name = "buttonCentauro";
-			this.buttonCentauro.Size = new System.Drawing.Size(90, 37);
-			this.buttonCentauro.TabIndex = 0;
-			this.buttonCentauro.Text = "CENTAURO";
-			this.buttonCentauro.UseVisualStyleBackColor = true;
-			this.buttonCentauro.Click += new System.EventHandler(this.ButtonCentauroClick);
-			// 
-			// buttonJSL
-			// 
-			this.buttonJSL.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonJSL.Location = new System.Drawing.Point(3, 6);
-			this.buttonJSL.Name = "buttonJSL";
-			this.buttonJSL.Size = new System.Drawing.Size(90, 37);
-			this.buttonJSL.TabIndex = 1;
-			this.buttonJSL.Text = "JSL";
-			this.buttonJSL.UseVisualStyleBackColor = true;
-			this.buttonJSL.Click += new System.EventHandler(this.ButtonJSLClick);
-			// 
-			// MainForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.ScrollBar;
-			this.ClientSize = new System.Drawing.Size(384, 47);
-			this.Controls.Add(this.buttonJSL);
-			this.Controls.Add(this.buttonCentauro);
-			this.Controls.Add(this.buttonMovida);
-			this.Controls.Add(this.buttonIntermedica);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.MaximizeBox = false;
-			this.Name = "MainForm";
-			this.Text = "NOC_EmbratelPortalLoginAssistant";
-			this.ResumeLayout(false);
-		}
-	}
+    partial class MainForm
+    {
+        private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.ToolStripMenuItem tripJsl;
+        private System.Windows.Forms.ToolStripMenuItem tripMovida;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem tripCentauro;
+        private System.Windows.Forms.ToolStripMenuItem tripIntermedica;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+        	this.tripJsl = new System.Windows.Forms.ToolStripMenuItem();
+        	this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+        	this.tripMovida = new System.Windows.Forms.ToolStripMenuItem();
+        	this.tripCentauro = new System.Windows.Forms.ToolStripMenuItem();
+        	this.tripIntermedica = new System.Windows.Forms.ToolStripMenuItem();
+        	this.menuStrip1.SuspendLayout();
+        	this.SuspendLayout();
+        	// 
+        	// tripJsl
+        	// 
+        	this.tripJsl.Name = "tripJsl";
+        	this.tripJsl.Size = new System.Drawing.Size(35, 20);
+        	this.tripJsl.Text = "JSL";
+        	this.tripJsl.Click += new System.EventHandler(this.TripJslClick);
+        	// 
+        	// menuStrip1
+        	// 
+        	this.menuStrip1.BackColor = System.Drawing.SystemColors.Menu;
+        	this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2);
+        	this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+        	this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.tripJsl,
+			this.tripMovida,
+			this.tripCentauro,
+			this.tripIntermedica});
+        	this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+        	this.menuStrip1.Name = "menuStrip1";
+        	this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+        	this.menuStrip1.Size = new System.Drawing.Size(1409, 24);
+        	this.menuStrip1.TabIndex = 4;
+        	this.menuStrip1.Text = "menuStrip1";
+        	// 
+        	// tripMovida
+        	// 
+        	this.tripMovida.Name = "tripMovida";
+        	this.tripMovida.Size = new System.Drawing.Size(59, 20);
+        	this.tripMovida.Text = "Movida";
+        	this.tripMovida.Click += new System.EventHandler(this.TripMovidaClick);
+        	// 
+        	// tripCentauro
+        	// 
+        	this.tripCentauro.Name = "tripCentauro";
+        	this.tripCentauro.Size = new System.Drawing.Size(68, 20);
+        	this.tripCentauro.Text = "Centauro";
+        	this.tripCentauro.Click += new System.EventHandler(this.TripCentauroClick);
+        	// 
+        	// tripIntermedica
+        	// 
+        	this.tripIntermedica.Name = "tripIntermedica";
+        	this.tripIntermedica.Size = new System.Drawing.Size(82, 20);
+        	this.tripIntermedica.Text = "Intermédica";
+        	this.tripIntermedica.Click += new System.EventHandler(this.TripIntermedicaClick);
+        	// 
+        	// MainForm
+        	// 
+        	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+        	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        	this.BackColor = System.Drawing.SystemColors.Menu;
+        	this.ClientSize = new System.Drawing.Size(1409, 751);
+        	this.Controls.Add(this.menuStrip1);
+        	this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+        	this.MainMenuStrip = this.menuStrip1;
+        	this.MaximizeBox = false;
+        	this.Name = "MainForm";
+        	this.Text = "NOC_EmbratelPortalLoginAssistant";
+        	this.menuStrip1.ResumeLayout(false);
+        	this.menuStrip1.PerformLayout();
+        	this.ResumeLayout(false);
+        	this.PerformLayout();
+
+        }
+    }
 }

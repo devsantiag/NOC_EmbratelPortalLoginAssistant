@@ -7,6 +7,8 @@ namespace NOC_EmbratelPortalLoginAssistant
 {
 	public partial class MainForm : Form
 	{
+		private WebBrowser showWebBrowserPortal;
+		
 		private enum Empresa
 		{
 			JSL,
@@ -28,27 +30,39 @@ namespace NOC_EmbratelPortalLoginAssistant
 
 		public MainForm()
 		{
-			this.TopMost = true;
 			InitializeComponent();
+			showWebBrowserPortal = new WebBrowser
+			{
+				Dock = DockStyle.None, // Usar None para permitir ajuste manual da posição
+				Top = 26, // Ajusta o controle 50 pixels para baixo
+				Width = this.ClientSize.Width, // Tamanho da largura do formulário
+				Height = this.ClientSize.Height - 0, // Tamanho ajustado, descontando 50px do Top
+				ScriptErrorsSuppressed = true
+			};
+			this.Controls.Add(showWebBrowserPortal);
+			showWebBrowserPortal.DocumentCompleted += WebBrowser1DocumentCompleted;
+			
+			showWebBrowserPortal.Navigate("https://webebt01.embratel.com.br/embratelonline/index.asp");
 		}
 
 		// Método genérico para abrir o PortalWeb e preencher login e senha
-		private void OpenPortalAndFillCredentials(string url, string login, string password, bool autoLogin = false)
-		{
-			currentLogin = login;
-			currentPassword = password;
-
-			PortalWeb portalWeb = new PortalWeb();
-			portalWeb.WebBrowser.DocumentCompleted += (sender, e) => WebBrowser_DocumentCompleted(sender, e, autoLogin);
-			portalWeb.WebBrowser.Navigate(url);
-			portalWeb.Show();
-		}
+//		private void OpenPortalAndFillCredentials(string url, string login, string password, bool autoLogin = false)
+//		{
+//			currentLogin = login;
+//			currentPassword = password;
+//
+//			PortalWeb portalWeb = new PortalWeb();
+//			portalWeb.WebBrowser.DocumentCompleted += (sender, e) => WebBrowser1DocumentCompleted(sender, e, autoLogin);
+//			portalWeb.WebBrowser.Navigate(url);
+//			portalWeb.Show();
+//		}
 
 		// Evento para preencher os campos de login e senha e submeter o formulário, se autoLogin for verdadeiro
-		private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e, bool autoLogin)
+		void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
 			WebBrowser webBrowser = sender as WebBrowser;
-			if (webBrowser != null)
+			
+			if (e.Url.ToString() == "https://webebt01.embratel.com.br/embratelonline/index.asp")
 			{
 				HtmlElement loginElement = webBrowser.Document.GetElementById("login");
 				HtmlElement passWordElement = webBrowser.Document.GetElementById("password");
@@ -58,15 +72,13 @@ namespace NOC_EmbratelPortalLoginAssistant
 					// Preenche os campos de login e senha
 					loginElement.SetAttribute("value", currentLogin);
 					passWordElement.SetAttribute("value", currentPassword);
-
-					if (autoLogin)
+					
+					
+					HtmlElement loginButton = showWebBrowserPortal.Document.GetElementById("loginButton");
+					
+					if (loginButton != null)
 					{
-						// Simula o clique no botão de login se autoLogin for verdadeiro
-						HtmlElement loginButton = webBrowser.Document.GetElementById("loginButton"); // Substitua pelo ID correto
-						if (loginButton != null)
-						{
-							loginButton.InvokeMember("click");
-						}
+						loginButton.InvokeMember("click");
 					}
 				}
 			}
@@ -74,26 +86,28 @@ namespace NOC_EmbratelPortalLoginAssistant
 		
 		private void HandleButtonClick(Empresa empresa)
 		{
-			var credentials = _credenciais[empresa];
-			OpenPortalAndFillCredentials("https://webebt01.embratel.com.br/embratelonline/index.asp", credentials.Item1, credentials.Item2, true);
+			var credencials = _credenciais[empresa];
+			currentLogin = credencials.Item1;
+			currentPassword = credencials.Item2;
+			
+			showWebBrowserPortal.Navigate("https://webebt01.embratel.com.br/embratelonline/index.asp");
 		}
-
-		// Eventos dos botões
-		void ButtonJSLClick(object sender, EventArgs e)
+		
+		void TripJslClick(object sender, EventArgs e)
 		{
 			HandleButtonClick(Empresa.JSL);
 		}
-		void ButtonIntermedicaClick(object sender, EventArgs e)
-		{
-			HandleButtonClick(Empresa.Intermedica);
-		}
-		void ButtonMovidaClick(object sender, EventArgs e)
+		void TripMovidaClick(object sender, EventArgs e)
 		{
 			HandleButtonClick(Empresa.Movida);
 		}
-		void ButtonCentauroClick(object sender, EventArgs e)
+		void TripCentauroClick(object sender, EventArgs e)
 		{
 			HandleButtonClick(Empresa.Centauro);
+		}
+		void TripIntermedicaClick(object sender, EventArgs e)
+		{
+			HandleButtonClick(Empresa.Intermedica);
 		}
 	}
 }
