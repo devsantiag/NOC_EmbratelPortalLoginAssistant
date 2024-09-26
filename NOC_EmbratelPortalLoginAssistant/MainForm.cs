@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
 namespace NOC_EmbratelPortalLoginAssistant
@@ -44,18 +43,6 @@ namespace NOC_EmbratelPortalLoginAssistant
 			
 			showWebBrowserPortal.Navigate("https://webebt01.embratel.com.br/embratelonline/index.asp");
 		}
-
-		// Método genérico para abrir o PortalWeb e preencher login e senha
-//		private void OpenPortalAndFillCredentials(string url, string login, string password, bool autoLogin = false)
-//		{
-//			currentLogin = login;
-//			currentPassword = password;
-//
-//			PortalWeb portalWeb = new PortalWeb();
-//			portalWeb.WebBrowser.DocumentCompleted += (sender, e) => WebBrowser1DocumentCompleted(sender, e, autoLogin);
-//			portalWeb.WebBrowser.Navigate(url);
-//			portalWeb.Show();
-//		}
 
 		// Evento para preencher os campos de login e senha e submeter o formulário, se autoLogin for verdadeiro
 		void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -109,9 +96,12 @@ namespace NOC_EmbratelPortalLoginAssistant
 		{
 			HandleButtonClick(Empresa.Intermedica);
 		}
+		
+//		Página responsável por editar login
 		void AdminToolStripMenuItemClick(object sender, EventArgs e)
 		{
-	
+			Admin admin = new Admin();
+			admin.Show();
 		}
 	}
 }
