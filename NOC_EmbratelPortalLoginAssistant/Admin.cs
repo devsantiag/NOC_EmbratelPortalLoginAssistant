@@ -29,9 +29,9 @@ namespace NOC_EmbratelPortalLoginAssistant
 		}
 		void AdminLoad(object sender, EventArgs e)
 		{
-			var strConnection = "server=localhost;uid=aulas; darabase=NOC_EmbratelPortalAccess_Credenciais";
-			var conexao = new MySqlConnection(strConnection);
-			conexao.Open();
+//			var strConnection = "server=localhost;uid=aulas; darabase=NOC_EmbratelPortalAccess_Credenciais";
+//			var conexao = new MySqlConnection(strConnection);
+//			conexao.Open();
 		}
 	}
 }

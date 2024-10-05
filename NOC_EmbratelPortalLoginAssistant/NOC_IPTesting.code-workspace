@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"name": "NOC_IPTesting",
+			"path": "../../NOC_IPTesting"
+		},
+		{
+			"name": "NOC_WebPage_Service",
+			"path": "../../NOC_WebPage_Service"
+		},
+		{
+			"name": "NOCActions",
+			"path": "../../NOCActions"
+		},
+		{
+			"name": "PingTest",
+			"path": "../../PingTest"
+		},
+		{
+			"name": "NOC_ClipBoard",
+			"path": "../../NOC_ClipBoard"
+		},
+		{
+			"name": "NOC_ContractualConnectivityTest",
+			"path": "../../NOC_ContractualConnectivityTest"
+		},
+		{
+			"name": "NOC_Email",
+			"path": "../../NOC_Email"
+		},
+		{
+			"name": "NOC_EmbratelPortalLoginAssistant",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
