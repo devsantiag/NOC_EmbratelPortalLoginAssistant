@@ -2,174 +2,225 @@
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Diagnostics;
 
 namespace NOC_EmbratelPortalLoginAssistant
 {
 	public partial class MainForm : Form
 	{
+		// Controle WebBrowser que será utilizado para navegar no portal.
 		private WebBrowser showWebBrowserPortal;
+		
+		// Caminho do arquivo de credenciais onde login e senha são armazenados.
 		private readonly string credentialsFilePath = @"C:\NOC_EmbratelPortalLoginAssistant\NOC_EmbratelPortalLoginAssistant\credentials.txt";
-		private Dictionary<Empresa, Tuple<string, string>> _credenciais; // Remover readonly
-
-		private enum Empresa
-		{
-			JSL,
-			Movida,
-			Intermedica,
-			Centauro
-		}
-
-		private readonly Dictionary<Empresa, Tuple<string, string>> _defaultCredenciais = new Dictionary<Empresa, Tuple<string, string>>
-		{
-			{ Empresa.JSL, Tuple.Create("EOL6442376", "Telcom#123!@#c") },
-			{ Empresa.Movida, Tuple.Create("EOL1534997", "Telcom#123!@#") },
-			{ Empresa.Intermedica, Tuple.Create("EOL799371", "Telcom#123!@#") },
-			{ Empresa.Centauro, Tuple.Create("EOL4421197", "Telcom#123!@#") }
-		};
-
+		
+		// Dicionário que armazena login e senha para diferentes usuários.
+		private Dictionary<string, string> _credenciais;
+		
+		// FileSystemWatcher para monitorar alterações no arquivo de credenciais.
+		private FileSystemWatcher fileWatcher;
+		
+		// Variáveis que armazenam o login e a senha atuais.
 		private string currentLogin;
 		private string currentPassword;
 
 		public MainForm()
 		{
 			InitializeComponent();
+			
+			// Inicializa o controle WebBrowser e o configura.
 			showWebBrowserPortal = new WebBrowser
 			{
 				Dock = DockStyle.None,
 				Top = 26,
 				Width = this.ClientSize.Width,
 				Height = this.ClientSize.Height - 0,
-				ScriptErrorsSuppressed = true
+				ScriptErrorsSuppressed = true // Suprime erros de script da página.
 			};
+			
+			// Adiciona o controle WebBrowser ao formulário.
 			this.Controls.Add(showWebBrowserPortal);
+			
+			// Define o evento que será acionado quando a navegação no WebBrowser for completada.
 			showWebBrowserPortal.DocumentCompleted += WebBrowser1DocumentCompleted;
 
+			// Carrega as credenciais a partir do arquivo.
 			LoadCredentialsFromFile();
+			
+			// Inicia o monitoramento do arquivo de credenciais.
+			StartFileWatcher();
+			
+			// Navega até o portal especificado.
 			showWebBrowserPortal.Navigate("https://webebt01.embratel.com.br/embratelonline/index.asp");
 		}
 
+		// Método que carrega as credenciais do arquivo para o dicionário.
 		private void LoadCredentialsFromFile()
 		{
-			_credenciais = new Dictionary<Empresa, Tuple<string, string>>();
+			_credenciais = new Dictionary<string, string>(); // Inicializa o dicionário.
 
+			// Verifica se o arquivo de credenciais existe.
 			if (!File.Exists(credentialsFilePath))
 			{
-				MessageBox.Show("Arquivo de credenciais não encontrado. Usando credenciais padrão.");
-				_credenciais = new Dictionary<Empresa, Tuple<string, string>>(_defaultCredenciais); // Use credenciais padrão
-				return;
+				// Tenta ler o arquivo de credenciais.
+				try
+				{
+					var lines = File.ReadAllLines(credentialsFilePath);
+					foreach(var line in lines)
+					{
+						var parts = line.Split('/'); // Divide a linha em login e senha.
+						if(parts.Length == 2)
+						{
+							var login = parts[0].Trim();
+							var senha = parts[1].Trim();
+							_credenciais[login] = senha; // Adiciona ao dicionário.
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					// Exibe mensagem de erro caso ocorra alguma exceção ao carregar as credenciais.
+					MessageBox.Show("Erro ao carregar as credenciais" + ex.Message);
+				}
 			}
 
+			// Outra tentativa de carregar o arquivo de credenciais, em caso de falha anterior.
 			try
 			{
 				var lines = File.ReadAllLines(credentialsFilePath);
 				foreach (var line in lines)
 				{
 					var parts = line.Split('/');
-					if (parts.Length == 3)
+					if (parts.Length == 2)
 					{
-						var empresa = (Empresa)Enum.Parse(typeof(Empresa), parts[0].Trim());
-						var login = parts[1].Trim();
-						var senha = parts[2].Trim();
-						_credenciais[empresa] = Tuple.Create(login, senha);
+						var login = parts[0].Trim();
+						var senha = parts[1].Trim();
+						_credenciais[login] = senha;
 					}
 				}
 			}
 			catch (Exception ex)
 			{
+				// Exibe uma mensagem de erro mais específica caso ocorra uma exceção.
 				MessageBox.Show("Erro ao carregar as credenciais: " + ex.Message);
 			}
 		}
 
-		private void SaveCredentialsToFile()
+		// Método que inicia o monitoramento do arquivo de credenciais para detectar alterações.
+		private void StartFileWatcher()
 		{
+			fileWatcher = new FileSystemWatcher(Path.GetDirectoryName(credentialsFilePath))
 			{
-				try
+				Filter = Path.GetFileName(credentialsFilePath), // Filtra o arquivo a ser monitorado.
+				NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.Size // Notifica alterações no conteúdo.
+			};
+			
+			// Define o evento a ser acionado quando o arquivo for alterado.
+			fileWatcher.Changed += OnFileChanged;
+			fileWatcher.EnableRaisingEvents = true; // Habilita o monitoramento.
+		}
+
+		// Método acionado quando o arquivo de credenciais for alterado.
+		private void OnFileChanged(object sender, FileSystemEventArgs e)
+		{
+			System.Threading.Thread.Sleep(200); // Aguarda 200ms para evitar conflitos de leitura/escrita.
+
+			// Atualiza as credenciais no dicionário na thread da interface gráfica.
+			Invoke((MethodInvoker)delegate
+			       {
+			       	LoadCredentialsFromFile();
+			       	MessageBox.Show("Credenciais atualizadas"); // Notifica o usuário sobre a atualização.
+			       });
+		}
+
+		// Método acionado quando a navegação no WebBrowser é completada.
+		void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+		{
+			WebBrowser webBrowser = sender as WebBrowser;
+
+			// Verifica se a URL atual é a página de login do portal.
+			if (e.Url.ToString() == "https://webebt01.embratel.com.br/embratelonline/index.asp")
+			{
+				// Obtém os elementos HTML da página (campos de login e senha).
+				HtmlElement loginElement = webBrowser.Document.GetElementById("login");
+				HtmlElement passWordElement = webBrowser.Document.GetElementById("password");
+
+				// Se os campos de login e senha forem encontrados, preenche-os com as credenciais atuais.
+				if (loginElement != null && passWordElement != null)
 				{
-					var lines = _credenciais.Select(c =>
-					                                string.Format("{0} / {1}* ({2})", c.Value.Item1, c.Value.Item2, c.Key));
-					File.WriteAllLines(credentialsFilePath, lines);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Erro ao salvar as credenciais: " + ex.Message);
+					loginElement.SetAttribute("value", currentLogin);
+					passWordElement.SetAttribute("value", currentPassword);
+
+					// Simula o clique no botão de login, caso ele seja encontrado.
+					HtmlElement loginButton = showWebBrowserPortal.Document.GetElementById("loginButton");
+
+					if (loginButton != null)
+					{
+						loginButton.InvokeMember("click");
+					}
 				}
 			}
 		}
 
-			void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+		// Método para lidar com o clique de um botão de login para determinada empresa.
+		private void HandleButtonClick(string login)
+		{
+			// Verifica se o login informado existe no dicionário de credenciais.
+			if (_credenciais.ContainsKey(login))
 			{
-				WebBrowser webBrowser = sender as WebBrowser;
+				currentLogin = login; // Armazena o login atual.
+				currentPassword = _credenciais[login]; // Armazena a senha correspondente.
+				showWebBrowserPortal.Navigate("https://webebt01.embratel.com.br/embratelonline/index.asp"); // Navega até a página de login.
+			}
+			else
+			{
+				// Exibe uma mensagem caso as credenciais não sejam encontradas.
+				MessageBox.Show("Credenciais não identificadas.");
+			}
+		}
 
-				if (e.Url.ToString() == "https://webebt01.embratel.com.br/embratelonline/index.asp")
+		// Métodos acionados pelos cliques dos botões de login para diferentes empresas.
+		void TripJslClick(object sender, EventArgs e)
+		{
+			HandleButtonClick("EOL6442376");
+		}
+
+		void TripMovidaClick(object sender, EventArgs e)
+		{
+			HandleButtonClick("EOL1534997");
+		}
+
+		void TripCentauroClick(object sender, EventArgs e)
+		{
+			HandleButtonClick("EOL4421197");
+		}
+
+		void TripIntermedicaClick(object sender, EventArgs e)
+		{
+			HandleButtonClick("EOL799371");
+		}
+
+		// Método que permite ao usuário abrir o arquivo de credenciais para edição.
+		void AdminToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			try
+			{
+				if (File.Exists(credentialsFilePath))
 				{
-					HtmlElement loginElement = webBrowser.Document.GetElementById("login");
-					HtmlElement passWordElement = webBrowser.Document.GetElementById("password");
-
-					if (loginElement != null && passWordElement != null)
-					{
-						loginElement.SetAttribute("value", currentLogin);
-						passWordElement.SetAttribute("value", currentPassword);
-
-						HtmlElement loginButton = showWebBrowserPortal.Document.GetElementById("loginButton");
-
-						if (loginButton != null)
-						{
-							loginButton.InvokeMember("click");
-						}
-					}
+					// Abre o arquivo de credenciais no Bloco de Notas.
+					Process.Start("notepad.exe", credentialsFilePath);
+				}
+				else
+				{
+					// Exibe uma mensagem caso o arquivo de credenciais não seja encontrado.
+					MessageBox.Show("Arquivo de credenciais não encontrado.");
 				}
 			}
-
-			private void HandleButtonClick(Empresa empresa)
+			catch (Exception ex)
 			{
-				if (_credenciais.ContainsKey(empresa))
-				{
-					var credencials = _credenciais[empresa];
-					currentLogin = credencials.Item1;
-					currentPassword = credencials.Item2;
-					showWebBrowserPortal.Navigate("https://webebt01.embratel.com.br/embratelonline/index.asp");
-				}
-			}
-
-			void TripJslClick(object sender, EventArgs e)
-			{
-				HandleButtonClick(Empresa.JSL);
-			}
-			void TripMovidaClick(object sender, EventArgs e)
-			{
-				HandleButtonClick(Empresa.Movida);
-			}
-			void TripCentauroClick(object sender, EventArgs e)
-			{
-				HandleButtonClick(Empresa.Centauro);
-			}
-			void TripIntermedicaClick(object sender, EventArgs e)
-			{
-				HandleButtonClick(Empresa.Intermedica);
-			}
-
-			void AdminToolStripMenuItemClick(object sender, EventArgs e)
-			{
-				
-
-				try
-				{
-					if (File.Exists(credentialsFilePath))
-					{
-						Process.Start("notepad.exe", credentialsFilePath);
-						 MessageBox.Show("Abrindo o arquivo: {0}", lines);
-					}
-					else
-					{
-						MessageBox.Show("Arquivo de credenciais não encontrado.");
-					}
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Erro ao abrir o arquivo de credenciais: " + ex.Message);
-				}
+				// Exibe uma mensagem caso ocorra um erro ao tentar abrir o arquivo.
+				MessageBox.Show("Erro ao abrir o arquivo de credenciais: " + ex.Message);
 			}
 		}
 	}
+}
