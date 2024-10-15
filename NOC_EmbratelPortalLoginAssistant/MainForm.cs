@@ -53,6 +53,7 @@ namespace NOC_EmbratelPortalLoginAssistant
 			// Navega até o portal especificado.
 			showWebBrowserPortal.Navigate("https://webebt01.embratel.com.br/embratelonline/index.asp");
 		}
+		
 
 		// Método que carrega as credenciais do arquivo para o dicionário.
 		private void LoadCredentialsFromFile()
@@ -80,7 +81,21 @@ namespace NOC_EmbratelPortalLoginAssistant
 				catch (Exception ex)
 				{
 					// Exibe mensagem de erro caso ocorra alguma exceção ao carregar as credenciais.
-					MessageBox.Show("Erro ao carregar as credenciais" + ex.Message);
+					Directory.CreateDirectory(Path.GetDirectoryName(credentialsFilePath));
+					if(!File.Exists(credentialsFilePath))
+					{
+						MessageBox.Show("O arquivo de credenciais não foi encontrado e será criado automaticamente na pasta 'Documentos'.\n\n" +
+						                "Instruções:\n" +
+						                "1. Um novo arquivo 'credentials.txt' será criado na pasta 'NOC_EmbratelPortalLoginAssistant' dentro de 'Documentos'.\n" +
+						                "2. Você pode editar esse arquivo com suas credenciais utilizando um editor de texto (por exemplo, Bloco de Notas).\n" +
+						                "3. Após salvar as alterações, o programa utilizará as novas credenciais automaticamente.\n\n" +
+						                "Caso tenha dúvidas, entre em contato com o suporte.",
+						                "Arquivo de Credenciais Criado",
+						                MessageBoxButtons.OK,
+						                MessageBoxIcon.Information);
+
+						File.WriteAllText(credentialsFilePath, "");
+					}
 				}
 			}
 
